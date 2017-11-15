@@ -2,8 +2,8 @@
 import yaml, sys, argparse
 
 def help():
-    print "Invalid argument, the following options are available: http, nodevert, mastervert"
-    print "Run python config.py <test> --help to look at the options available for the test"
+    print "Following options are available: http, nodevert, mastervert"
+    print "Run python config.py <test> --help to look at the options available"
 
 test_name = sys.argv[1]
 parser = argparse.ArgumentParser()
@@ -23,11 +23,11 @@ if test_name == "http":
     parser.add_argument('--mb_ramp_up', required=False, dest="mb_ramp_up", help="thread ramp-up time in seconds")
     parser.add_argument('--url_path', required=False, dest="url_path", help="target path for HTTP(S) requests")
 # nodevertical
-elif test_name == "nodevert":
+elif test_name == "nodevertical":
     parser.add_argument('--config', required=True, dest="config", help="path to the clusterloader config")
     parser.add_argument('--total', required=False, dest="total", help="total number of pods")
 # mastervertical
-elif test_name == "mastervert":
+elif test_name == "mastervertical":
     parser.add_argument('--config', required=True, dest="config", help="path to the clusterloader config")
     parser.add_argument('--num', required=False, dest="num", help="number of projects")
 else:
@@ -68,6 +68,8 @@ with open(args.config, 'r') as ymlfile:
     elif test_name == "mastervert":
         if args.num is not None:
             cfg['projects'][0]['num'] = args.num
+    else:
+        help()
 
 with open(args.config, 'w') as ymlfile:
     yaml.dump(cfg, ymlfile)
