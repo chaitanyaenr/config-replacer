@@ -1,0 +1,19 @@
+projects:
+- basename: clusterproject
+  num: '10'
+  templates:
+  - {file: ./content/build-config-template.json, num: 3}
+  - {file: ./content/build-template.json, num: 6}
+  - {file: ./content/image-stream-template.json, num: 1}
+  - file: ./content/deployment-config-1rep-template.json
+    num: 2
+    parameters:
+    - {ENV_VALUE: asodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij12}
+  - file: ./content/deployment-config-2rep-template.json
+    num: 1
+    parameters:
+    - {ENV_VALUE: asodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij0emc2oed2ed2ed2e2easodfn209e8j0eij12}
+  - {file: ./content/ssh-secret-template.json, num: 20}
+  - {file: ./content/route-template.json, num: 3}
+quotas:
+- {name: default}

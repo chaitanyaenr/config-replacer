@@ -21,17 +21,15 @@ if test_name == "http":
     parser.add_argument('--mb_ka_requests', required=False, dest="mb_ka", help="how many HTTP keep-alive requests to send before sending Connection: close")
     parser.add_argument('--mb_reuse', required=False, dest="mb_reuse", help="use TLS session reuse")
     parser.add_argument('--mb_ramp_up', required=False, dest="mb_ramp_up", help="thread ramp-up time in seconds")
-    parser.add_argument('--url_path', required=False, dest="url_path", help="traget path for HTTP(S) requests")
+    parser.add_argument('--url_path', required=False, dest="url_path", help="target path for HTTP(S) requests")
 # nodevertical
 elif test_name == "nodevert":
     parser.add_argument('--config', required=True, dest="config", help="path to the clusterloader config")
     parser.add_argument('--total', required=False, dest="total", help="total number of pods")
-    parser.add_argument('--num', required=False, dest="num", help="please add description")
 # mastervertical
 elif test_name == "mastervert":
     parser.add_argument('--config', required=True, dest="config", help="path to the clusterloader config")
-    parser.add_argument('--total', required=False, dest="total", help="total number of pods")
-    parser.add_argument('--num', required=False, dest="num", help="please add description")
+    parser.add_argument('--num', required=False, dest="num", help="number of projects")
 else:
     help()
     sys.exit(1)
@@ -65,11 +63,11 @@ with open(args.config, 'r') as ymlfile:
                 if args.mb_ramp_up is not None and key == "MB_RAMP_UP":
                     param[key] = args.mb_ramp_up
     elif test_name == "nodevert":
-        parameters = cfg['projects'][0]['pods']
         if args.total is not None:
-            parameters[0]['total'] = args.total
+            cfg['projects'][0]['pods'][0]['total'] = args.total
     elif test_name == "mastervert":
-        pass
+        if args.num is not None:
+            cfg['projects'][0]['num'] = args.num
 
 with open(args.config, 'w') as ymlfile:
     yaml.dump(cfg, ymlfile)
